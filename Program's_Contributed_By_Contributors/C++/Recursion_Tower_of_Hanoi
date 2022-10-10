@@ -1,0 +1,32 @@
+// DEAD CALM
+// de_
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+#define en "\n"
+#define pb push_back
+#define rep(i, a, b) for (int i = a; i < b; i++)
+#define sz(x) (int)((x).size())
+#define all(x) (x).begin(), (x).end()
+
+void tower_of_hanoi(int n, char a, char b, char c)
+{
+    if (n == 1)
+    {
+        cout << "Move 1 from" << a << " to " << c << en;
+        return;
+    }
+    tower_of_hanoi(n - 1, a, c, b);
+    cout << "Move " << n << " from " << a << " to " << c << en;
+    tower_of_hanoi(n - 1, b, a, c);
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+   
+     tower_of_hanoi(n,'A','B','C');
+    
+    return 0;
+}
