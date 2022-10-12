@@ -1,0 +1,28 @@
+const http = require('http');
+const fs = require('fs');
+const _ = require('lodash');
+
+//// have to do something with html pages and server.js (Routing)
+
+const server = http.createServer((req,res)=>{
+    console.log('request', req.url);
+    const num = _.random(20,32);
+    console.log(num);
+    res.setHeader('Content-Type','text/html');
+    // res.write('<title>loading</title>');
+    // res.write('<p>hello again</p>');
+    // res.write('<body></body>');
+    var int = null;
+    fs.readFile('../p1/index.html',(err,data)=>{
+        if(!err){
+            // res.write('data');
+            // res.end();
+            res.end(data);
+        }
+        else console.log(err.code)
+    });  
+})
+
+server.listen('3000','localhost',()=>{
+    console.log('listenong...');
+})
