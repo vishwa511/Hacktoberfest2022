@@ -1,0 +1,69 @@
+const { application } = require('express');
+const express = require('express');
+const morgan = require('morgan');
+// const fs = require('fs');
+// const { cond } = require('lodash');
+
+// creating express app
+const app = express();
+// app.listen(3000);
+
+// app.get('/',(req,res)=>{
+//     console.log('requested ' + req.url);
+//     // fs.readFile('./views/home.html',(err,data)=>{
+//             // if(err) console.log(err);
+//             // console.log(data);
+//             res.sendFile('./views/home.html', {root : __dirname});
+//     // });
+// })
+
+// app.get('/about',(req,res)=>{
+//     console.log('requested ' + req.url);
+//     // fs.readFile('./views/home.html',(err,data)=>{
+//             // if(err) console.log(err);
+//             // console.log(data);
+//             res.sendFile('./views/about.html', {root : __dirname});
+//     // });
+// });
+
+// ///// redirect
+
+// app.get('/about-me',(req,res)=>{
+//     res.redirect('/about');
+// })
+
+// app.use((req,res)=>{
+//     // res.status(404);
+//     res.sendFile('./views/404.html', {root : __dirname});
+// });
+app.listen('3000');
+app.set('view engine', 'ejs');
+// app.set('views' , 'views');    if ejs is not in views named folder, then specify the folder name
+
+app.use(express.static('public'));
+app.use(morgan('short'));           // 3rd party middleware
+
+
+app.get('/', (req,res)=>{
+    const data = [{title : 'blog1' , body : 'Hello this is my first blog'},
+    {title : 'blog2' , body : 'Hello this is my second blog'},
+    {title : 'blog3' , body : 'Hello this is my third blog'},
+    {title : 'blog4' , body : 'Hello this is my fourth blog'}
+    ];
+    res.render('home',{title : 'Home', data});
+})
+
+app.get('/about', (req,res)=>{
+    res.render('about',{title : 'About'});   //srever side rendering => ejs --> view engine --> html page
+})
+
+app.get('/blog/create', (req,res)=>{
+    res.render('create',{title : 'New blog'});
+})
+
+app.use( (req,res)=>{
+    res.render('404',{title : 'Not found'});
+})
+
+
+
