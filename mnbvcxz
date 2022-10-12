@@ -1,0 +1,7 @@
+<div className="container">
+            {/* <pre>{JSON.//stringify(users,null,4)}</pre> */}
+            {users && users.map((user) => <div>(user.name)</div>)}
+            <button onClick={fetchUserData} className='btn btn-primary'>
+                Fetch user data from the button
+            </button>
+        </div>
